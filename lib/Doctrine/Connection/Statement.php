@@ -262,7 +262,7 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
             $this->_conn->getListener()->postStmtExecute($event);
             //fdorn, pguthy: 2011-07-04: fix maximum cursors exceeded with data-load
 			//Sometimes Selects appear here. SO close the startements.
-            if (subst($this->_stmt->queryString,0,6) != 'SELECT'){
+            if (substr($this->_stmt->queryString,0,6) != 'SELECT'){
                 $this->_stmt->closeCursor();
             }
             return $result;
@@ -272,7 +272,7 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
         
         $this->_conn->rethrowException($e, $this);
 
-        if (subst($this->_stmt->queryString,0,6) != 'SELECT'){
+        if (substr($this->_stmt->queryString,0,6) != 'SELECT'){
             $this->_stmt->closeCursor();
         }
 
